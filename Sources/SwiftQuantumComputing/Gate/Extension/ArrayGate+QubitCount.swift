@@ -21,6 +21,9 @@
 import Foundation
 
 extension Array where Element == Gate {
+
+    // MARK: - Internal methods
+
     func qubitCount() -> Int {
         let maxInput = reduce(0) { currentMax, gate in
             guard let otherMax = gate.extractInputs().max() else {

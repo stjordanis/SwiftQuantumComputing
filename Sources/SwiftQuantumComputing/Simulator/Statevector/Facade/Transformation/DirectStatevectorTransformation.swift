@@ -45,7 +45,7 @@ extension DirectStatevectorTransformation: StatevectorTransformation {
             nextVector = apply(oneQubitMatrix: gateMatrix,
                                toStatevector: vector,
                                atInput: inputs.first!)
-        } else if inputs.count == 2 && isTwoQubitControlledMatrix(gateMatrix) {
+        } else if inputs.count == 2 && gateMatrix.isTwoQubitControlledMatrix() {
             nextVector = apply(twoQubitMatrix: gateMatrix,
                                toStatevector: vector,
                                atTarget: inputs.last!,
@@ -65,22 +65,6 @@ extension DirectStatevectorTransformation: StatevectorTransformation {
 private extension DirectStatevectorTransformation {
 
     // MARK: - Private methods
-
-    func isTwoQubitControlledMatrix(_ matrix: Matrix) -> Bool {
-        let elements = matrix.elements
-        let expectedElements = [
-            [Complex.one, Complex.zero, Complex.zero, Complex.zero],
-            [Complex.zero, Complex.one, Complex.zero, Complex.zero],
-            [Complex.zero, Complex.zero],
-            [Complex.zero, Complex.zero]
-        ]
-
-        return zip(elements, expectedElements).reduce(true) { acc, tuple in
-            let (row, expectedRow) = tuple
-
-            return acc && Array(row[0..<expectedRow.count]) == expectedRow
-        }
-    }
 
     func apply(oneQubitMatrix matrix: Matrix,
                toStatevector vector: Vector,

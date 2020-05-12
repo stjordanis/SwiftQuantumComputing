@@ -72,6 +72,7 @@ public func allTests() -> [XCTestCaseEntry] {
         testCase(String_BitXorTests.allTests),
         testCase(String_IsBitActivatedTests.allTests),
         testCase(Matrix_ControlledMatrixTests.allTests),
+        testCase(Matrix_IsTwoQubitControlledMatrixTests.allTests),
         testCase(Matrix_OracleTests.allTests),
         testCase(Gate_OracleWithRangeInputsTests.allTests),
         testCase(Gate_SingleQubitGateRangeTargetsTests.allTests),
